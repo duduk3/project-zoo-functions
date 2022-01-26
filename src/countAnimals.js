@@ -9,12 +9,13 @@ function countAnimals(animal, ...sexo) {
   }
   const { specie, sex } = animal;
   if (!sex && species.some(({ name }) => name === specie)) {
-    return { [specie]: specieNames[specie] };
+    return specieNames[specie];
   }
-  const animalsSpecie = species.filter((e) => e.location === 'NE');
-  return animalsSpecie;
+  const animalsSpecie = species.filter(({ name }) => name === specie);
+  const animalsSpecieSex = animalsSpecie[0].residents.filter((resident) => (resident.sex === sex));
+  return animalsSpecieSex.length;
 }
 
-console.log(countAnimals({ specie: 'lions' }));
+console.log(countAnimals({ specie: 'giraffes', sex: 'male' }));
 
 module.exports = countAnimals;
