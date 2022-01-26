@@ -11,9 +11,17 @@ function isManager(id) {
 }
 
 function getRelatedEmployees(managerId) {
-  // seu código aqui
+  if (isManager(managerId)) {
+    const namesFilter = employees.filter((employee) => {
+      if (employee.managers.includes(managerId)) {
+        const { firstName } = employee;
+        return firstName;
+      }
+    });
+    return namesFilter.map((name) => name.firstName);
+  }
 }
 
-console.log(isManager(stephanieId));
+console.log(getRelatedEmployees(stephanieId));
 
 module.exports = { isManager, getRelatedEmployees };
