@@ -14,6 +14,7 @@ function getRelatedEmployees(managerId) {
           const { firstName } = employee;
           return firstName;
         }
+        return namesFilter;
       });
       return namesFilter.map((name) => name.firstName);
     }
