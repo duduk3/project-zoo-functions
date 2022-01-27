@@ -1,10 +1,9 @@
 const data = require('../data/zoo_data');
 
 const { species } = data;
-const specieNames = species;
 
 function countAnimals(animal) {
-  specieNames.reduce((acc, specie) => ({ ...acc, [specie.name]: specie.residents.length }), {});
+  const specieNames = species.reduce((acc, specie) => ({ ...acc, [specie.name]: specie.residents.length }), {});
   if (animal === '' || animal === undefined) {
     return specieNames;
   }
@@ -17,6 +16,6 @@ function countAnimals(animal) {
   return animalsSpecieSex.length;
 }
 
-console.log(countAnimals({ specie: 'giraffes', sex: 'female' }));
+console.log(countAnimals(''));
 
 module.exports = countAnimals;
