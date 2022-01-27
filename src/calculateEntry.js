@@ -10,12 +10,12 @@ const entrantsDudu = [
 ];
 
 function countEntrants(entrants) {
+  if (entrants === '' || entrants === [] || entrants === {}) {
+    return 0;
+  }
   const isChild = entrants.filter(({ age }) => age < 18);
   const isAdult = entrants.filter(({ age }) => age >= 18 && age < 50);
   const isSenior = entrants.filter(({ age }) => age >= 50);
-  // if (isChild.length > 0) {
-  //   console.log(isChild.length);
-  // }
   return {
     child: isChild.length,
     adult: isAdult.length,
@@ -26,7 +26,17 @@ function countEntrants(entrants) {
 console.log(countEntrants(entrantsDudu));
 
 function calculateEntry(entrants) {
-  // seu código aqui
+  if (entrants === '' || entrants === undefined) {
+    return 0;
+  }
+  if (Object.values(entrants).length === 0 || entrants.length === 0) {
+    return 0;
+  }
+  const newEntrants = countEntrants(entrants);
+  const total = (entry) => entry.adult * 49.99 + entry.child * 20.99 + entry.senior * 24.99;
+  return total(newEntrants);
 }
+
+console.log(calculateEntry(entrantsDudu));
 
 module.exports = { calculateEntry, countEntrants };
