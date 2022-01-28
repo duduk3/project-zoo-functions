@@ -1,31 +1,59 @@
-const data = require('./zoo_data');
+// const data = require('./zoo_data');
 
-const { species } = data;
+// const { species } = data;
 
-const newObj = species.reduce((acc, specie) => ({
-  ...acc, [specie.location]: [],
-}), {});
+// const newObj = species.reduce((acc, specie) => ({
+//   ...acc, [specie.location]: [],
+// }), {});
 
-const speciesLocation = (local) => {
-  if (local === '' || local === undefined) {
-    species.forEach((specie) => {
-      const getLocal = specie.location;
-      newObj[getLocal] = [...newObj[getLocal], specie.name];
-      return newObj;
-    }, newObj);
-    return newObj;
-  }
+// const speciesLocation = (local) => {
+//   if (local === '' || local === undefined) {
+//     species.forEach((specie) => {
+//       const getLocal = specie.location;
+//       newObj[getLocal] = [...newObj[getLocal], specie.name];
+//       return newObj;
+//     }, newObj);
+//     return newObj;
+//   }
+// };
+
+// console.log(speciesLocation(''));
+
+// const nameForSpecie = (arg) => {
+//   const { location: local, sex: sexo, sorted } = arg;
+
+//   if (sorted) {
+//     console.log('show');
+//   }
+//   return speciesLocation;
+// };
+
+// // console.log(nameForSpecie({ location: 'NE', sex: 'male', sorted: true }));
+
+let newObj = {
+  chave: ['valor1', 2, true],
+  chave2: ['valor', 12, false],
 };
 
-console.log(speciesLocation(''));
+const local = 'NE';
 
-const nameForSpecie = (arg) => {
-  const { location: local, sex: sexo, sorted } = arg;
+newObj = { ...newObj, chave3: ['chaves', 10, false] };
+// newObj[local] = [13];
 
-  if (sorted) {
-    console.log('show');
-  }
-  return speciesLocation;
+console.log(newObj);
+
+const newObjSpecies = {
+  lions: ['Zena', 'Maxwell', 'Faustino', 'Dee'],
+  tigers: ['Shu', 'Esther'],
+  bears: ['Hiram', 'Edwardo', 'Milan'],
+  penguins: ['Joe', 'Tad', 'Keri', 'Nicholas'],
+  otters: ['Neville', 'Lloyd', 'Mercedes', 'Margherita'],
+  frogs: ['Cathey', 'Annice'],
+  snakes: ['Paulette', 'Bill'],
+  elephants: ['Ilana', 'Orval', 'Bea', 'Jefferson'],
+  giraffes: ['Gracia', 'Antone', 'Vicky', 'Clay', 'Arron', 'Bernard'],
 };
 
-// console.log(nameForSpecie({ location: 'NE', sex: 'male', sorted: true }));
+
+
+console.log(Object.entries(newObjSpecies));
