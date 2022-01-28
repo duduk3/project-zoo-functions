@@ -42,14 +42,13 @@ const allSpeciesIncludeNames = (includeNames) => {
 const allSpeciesForSex = (includeNames) => {
   if (includeNames) {
     species.forEach((specie) => {
-      const getLocal = specie.location;
-      specie.residents.forEach((resident) => {
-        newObj[getLocal] = [...newObj[getLocal], { getlocal: resident.name }];
+      const animalName = [];
+      specie.residents.map((resident) => {
+        animalName = [...animalName, resident.name];
       });
-      return newObjSpecies;
+      return [...newObjSpecies[specie.name], animalName];
     });
   }
-  return newObj;
 };
 
 function getAnimalMap(options) {
