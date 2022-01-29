@@ -1,7 +1,12 @@
-// const data = require('./zoo_data');
+const data = require('./zoo_data');
 
-// const { species } = data;
+const { hours } = data;
 
+const days = Object.keys(hours);
+
+console.log(hours);
+
+console.log(days);
 // const newObj = species.reduce((acc, specie) => ({
 //   ...acc, [specie.location]: [],
 // }), {});
@@ -54,6 +59,23 @@ const newObjSpecies = {
   giraffes: ['Gracia', 'Antone', 'Vicky', 'Clay', 'Arron', 'Bernard'],
 };
 
-
-
 console.log(Object.entries(newObjSpecies));
+
+let timeA = 1000;
+let timeB = 500;
+let numA = 4;
+let numB = 6;
+let numC = 2;
+
+const sum = (a, b) => a + b;
+
+setTimeout(() => {
+  numC = sum(numA, numB);
+  console.log(numC);
+}, timeA);
+
+console.log(numC);
+
+setTimeout(() => {
+  console.log(sum(numA, numC) === numB);
+}, timeB);

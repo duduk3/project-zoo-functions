@@ -1,18 +1,22 @@
 const data = require('../data/zoo_data');
 
-const { species } = data;
-
-const newObj = species.reduce((acc, { location }) => ({
+const newObj = data.species.reduce((acc, { location }) => ({
   ...acc, [location]: [],
 }), {});
 
-const newObjSpecies = species.reduce((acc, { name }) => ({
+console.log(newObj);
+
+const newObjSpecies = data.species.reduce((acc, { name }) => ({
   ...acc, [name]: [],
-}), {});
+}), []);
+
+
+const animalsNames = data.species.map((specie) => specie.residents);
+
 
 const allSpeciesLocation = (options) => {
   if (options === undefined || options === '') {
-    species.forEach((specie) => {
+    data.species.forEach((specie) => {
       const getLocal = specie.location;
       newObj[getLocal] = [...newObj[getLocal], specie.name];
       return newObj;
@@ -23,7 +27,7 @@ const allSpeciesLocation = (options) => {
 
 const allSpeciesIncludeNames = (includeNames) => {
   if (includeNames) {
-    species.forEach((specie) => {
+    data.species.forEach((specie) => {
       const getLocal = specie.location;
       const newObjSpecies2 = newObjSpecies;
       specie.residents.forEach((resident) => {
@@ -37,18 +41,6 @@ const allSpeciesIncludeNames = (includeNames) => {
     });
   }
   return newObjSpecies;
-};
-
-const allSpeciesForSex = (includeNames) => {
-  if (includeNames) {
-    species.forEach((specie) => {
-      const animalName = [];
-      specie.residents.map((resident) => {
-        animalName = [...animalName, resident.name];
-      });
-      return [...newObjSpecies[specie.name], animalName];
-    });
-  }
 };
 
 function getAnimalMap(options) {
@@ -68,6 +60,6 @@ function getAnimalMap(options) {
   return newObj;
 }
 
-console.log(getAnimalMap({ includeNames: true }));
+console.log(getAnimalMap());
 
 module.exports = getAnimalMap;
