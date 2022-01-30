@@ -1,81 +1,58 @@
 const data = require('./zoo_data');
 
-const { hours } = data;
+// const newObj = {};
 
-const days = Object.keys(hours);
-
-console.log(hours);
-
-console.log(days);
-// const newObj = species.reduce((acc, specie) => ({
-//   ...acc, [specie.location]: [],
+// const animalsLocation = data.species.reduce((acc, specie) => ({
+//   ...acc, [specie.location]: data.species.filter((takenames) => specie.location === takenames.location).map((resident) => resident.name),
 // }), {});
 
-// const speciesLocation = (local) => {
-//   if (local === '' || local === undefined) {
-//     species.forEach((specie) => {
-//       const getLocal = specie.location;
-//       newObj[getLocal] = [...newObj[getLocal], specie.name];
-//       return newObj;
-//     }, newObj);
-//     return newObj;
-//   }
+// const fillSpecies = () => {
 // };
 
-// console.log(speciesLocation(''));
+// fillSpecies();
 
-// const nameForSpecie = (arg) => {
-//   const { location: local, sex: sexo, sorted } = arg;
+// console.log(animalsLocation);
 
-//   if (sorted) {
-//     console.log('show');
-//   }
-//   return speciesLocation;
-// };
+// //* * */ =======================================
 
-// // console.log(nameForSpecie({ location: 'NE', sex: 'male', sorted: true }));
+// // function groupBy (array, key) {
+// // 	return array.reduce((acc, item) => ({
+// //       ...acc,
+// //       [item[key]]: [...(acc[item[key]] ?? []), item],
+// //     }),
+// //   {});
+// //   return 'any';
+// // };
 
-let newObj = {
-  chave: ['valor1', 2, true],
-  chave2: ['valor', 12, false],
-};
+// //* * */ =======================================
 
-const local = 'NE';
+// //  (result[value] || (result[value] = [])).push(key);
 
-newObj = { ...newObj, chave3: ['chaves', 10, false] };
-// newObj[local] = [13];
+// //* =======================================*/
 
-console.log(newObj);
+// const dor = 'pain';
 
-const newObjSpecies = {
-  lions: ['Zena', 'Maxwell', 'Faustino', 'Dee'],
-  tigers: ['Shu', 'Esther'],
-  bears: ['Hiram', 'Edwardo', 'Milan'],
-  penguins: ['Joe', 'Tad', 'Keri', 'Nicholas'],
-  otters: ['Neville', 'Lloyd', 'Mercedes', 'Margherita'],
-  frogs: ['Cathey', 'Annice'],
-  snakes: ['Paulette', 'Bill'],
-  elephants: ['Ilana', 'Orval', 'Bea', 'Jefferson'],
-  giraffes: ['Gracia', 'Antone', 'Vicky', 'Clay', 'Arron', 'Bernard'],
-};
+// //   _.reduce([1, 2], function(sum, n) {
+// //     return sum + n;
+// //   }, 0);
+// //   // => 3
 
-console.log(Object.entries(newObjSpecies));
+// const novoAgrup = data.species.reduce((result, value) => {
+//   result[value.name] = (value.residents.map((resident) => resident.name));
+//   return result;
+// }, {});
 
-let timeA = 1000;
-let timeB = 500;
-let numA = 4;
-let numB = 6;
-let numC = 2;
+// console.log(novoAgrup.lions);
 
-const sum = (a, b) => a + b;
+// const { species } = data;
 
-setTimeout(() => {
-  numC = sum(numA, numB);
-  console.log(numC);
-}, timeA);
+// function groupBy (array, key) {
+// 	return array.reduce((acc, item) => {
+//     	if (!acc[item[key]]) acc[item[key]] = []
+//         acc[item[key]].push(item)
+//         return acc
+//     }, {})
+// }
 
-console.log(numC);
 
-setTimeout(() => {
-  console.log(sum(numA, numC) === numB);
-}, timeB);
+console.log(data.hours.Saturday.close);
