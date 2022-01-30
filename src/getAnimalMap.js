@@ -23,16 +23,16 @@ const allSpeciesLocation = (options) => {
   return objAnimalsLocations;
 };
 
-const allSpeciesIncludeNames = (includeNames) => {
-  if (includeNames) {
-  }
-  return objAnimalsLocations;
-};
+// const allSpeciesIncludeNames = (includeNames) => {
+//   if (includeNames) {
+//   }
+//   return objAnimalsLocations;
+// };
 
 function getAnimalMap(options) {
   allSpeciesLocation(options);
   if (options !== undefined) {
-    const { includeNames, sorted = false, sex: sexo } = options;
+    // const { includeNames, sorted = false, sex: sexo } = options;
     // allSpeciesIncludeNames(includeNames);
   }
   // if (sexo === 'female') {
