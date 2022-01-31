@@ -25,15 +25,13 @@ function getEmployeesCoverage(arg) {
   return employees.reduce((acc, el) => {
     const { responsibleFor } = el;
     const specieName = responsibleFor.reduce((acum, item) => [...acum, ...getNameById(item)], []);
-    const specieLocal = responsibleFor.reduce((acumulator, item) => {
-      return [...acumulator, ...getLocal(item)];
-    }, []);
+    const locals = responsibleFor.reduce((ac, item) => [...ac, ...getLocal(item)], []);
     const fullName = `${el.firstName} ${el.lastName}`;
     return {
       id: el.id,
       fullName,
       species: specieName,
-      locations: specieLocal,
+      locations: locals,
     };
   }, {});
 }
