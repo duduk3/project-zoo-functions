@@ -7,34 +7,37 @@ let newEmployee = [];
 
 const filterEmployees = (arg) => {
   const { name, id } = arg;
-  employees.forEach((employee) => {
+  employees.filter((employee) => {
     if (name === employee.firstName || name === employee.lastName || id === employee.id) {
       newEmployee = [...newEmployee, employee];
     }
+    return true;
   });
-  return newEmployee;
+  return false;
 };
-console.log(filterEmployees({ name: 'Spry' }));
+
+const getNameById = (id) => species.filter((element) => id === element.id).map((el) => el.name);
+
+const getLocal = (id) => species.filter((element) => id === element.id).map((el) => el.location);
+
+const idAnimal = '';
 
 function getEmployeesCoverage(arg) {
   const getEmployeeData = filterEmployees(arg);
-  return getEmployeeData.reduce((acc, el) => {
-    const specieName = [];
-    data.species.forEach((spec) => {
-      if (el.responsibleFor === spec.id) {
-        specieName.push(spec.name);
-      }
-    });
+  return employees.reduce((acc, el) => {
+    const { responsibleFor } = el;
+    const specieName = responsibleFor.reduce((acum, item) => [...acum, ...getNameById(item)], []);
+    const specieLocal = responsibleFor.reduce((acumulator, item) => [...acumulator, ...getLocal(item)], []);
     const fullName = `${el.firstName} ${el.lastName}`;
     return {
       id: el.id,
       fullName,
-      species: [...specieName],
-
+      species: specieName,
+      locations: specieLocal,
     };
   }, {});
 }
 
-console.log(getEmployeesCoverage({ name: 'Spry' }));
+console.log(getEmployeesCoverage({ name: 'Nelson' }));
 
 module.exports = getEmployeesCoverage;
