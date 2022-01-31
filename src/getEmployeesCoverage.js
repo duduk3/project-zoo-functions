@@ -20,14 +20,14 @@ const getNameById = (id) => species.filter((element) => id === element.id).map((
 
 const getLocal = (id) => species.filter((element) => id === element.id).map((el) => el.location);
 
-const idAnimal = '';
-
 function getEmployeesCoverage(arg) {
-  const getEmployeeData = filterEmployees(arg);
+  filterEmployees(arg);
   return employees.reduce((acc, el) => {
     const { responsibleFor } = el;
     const specieName = responsibleFor.reduce((acum, item) => [...acum, ...getNameById(item)], []);
-    const specieLocal = responsibleFor.reduce((acumulator, item) => [...acumulator, ...getLocal(item)], []);
+    const specieLocal = responsibleFor.reduce((acumulator, item) => {
+      return [...acumulator, ...getLocal(item)];
+    }, []);
     const fullName = `${el.firstName} ${el.lastName}`;
     return {
       id: el.id,
