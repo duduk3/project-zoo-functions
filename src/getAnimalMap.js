@@ -1,49 +1,67 @@
 const data = require('../data/zoo_data');
 
-const objAnimalsLocations = data.species.reduce((acc, { location }) => ({
-  ...acc, [location]: [],
-}), {});
-
-console.log(objAnimalsLocations);
-
-const arrayAnimalsNames = data.species.reduce((acc, specie) => ({
+const arrayNames = data.species.reduce((acc, specie) => ({
   ...acc, [specie.name]: specie.residents.map((resident) => resident.name),
 }), {});
 
-console.log(arrayAnimalsNames);
-
-const allSpeciesLocation = (options) => {
-  if (options === undefined || options === '') {
-    data.species.forEach((specie) => {
-      const getLocal = specie.location;
-      objAnimalsLocations[getLocal] = [...objAnimalsLocations[getLocal], specie.name];
-      return objAnimalsLocations;
-    });
-  }
-  return objAnimalsLocations;
+const femaleFiltered = () => {
+  data.species.reduce((acc, specie) => ({
+    ...acc,
+    [specie.name]: specie.residents
+      .filter((resident) => resident.sex === 'female')
+      .map((n) => n.name),
+  }), {});
 };
 
-// const allSpeciesIncludeNames = (includeNames) => {
-//   if (includeNames) {
-//   }
-//   return objAnimalsLocations;
-// };
+const maleFiltered = () => {
+  data.species.reduce((acc, specie) => ({
+    ...acc,
+    [specie.name]: specie.residents
+      .filter((resident) => resident.sex === 'male')
+      .map((n) => n.name),
+  }), {});
+};
+
+const filterSex = (sex) => {
+  if (sex === 'female') femaleFiltered();
+  if (sex === 'male') maleFiltered();
+};
+
+const arraySorted = () => {
+  Object.keys(arrayNames).map((k) => arrayNames[k].sort());
+};
+
+const objAniLocals = data.species.reduce((acc, e) => ({ ...acc, ...{ [e.location]: [] } }), {});
+
+const allSpeciesLocation = (options) => {
+  data.species.forEach((elem) => {
+    objAniLocals[elem.location] = [...objAniLocals[elem.location], ...[elem.name]];
+  });
+};
+
+const nameSpeciesLocation = (options) => {
+  data.species.forEach((elem) => {
+    objAniLocals[`${elem.location}`] = [
+      ...objAniLocals[`${elem.location}`],
+      { [`${elem.name}`]: [...arrayNames[`${elem.name}`]] }];
+  });
+};
 
 function getAnimalMap(options) {
-  allSpeciesLocation(options);
-  if (options !== undefined) {
-    // const { includeNames, sorted = false, sex: sexo } = options;
-    // allSpeciesIncludeNames(includeNames);
+  if (!options) {
+    allSpeciesLocation(options);
+    return objAniLocals;
   }
-  // if (sexo === 'female') {
-  //   console.log('com sexo female');
-  // } else if (sexo === 'female') {
-  //   console.log('com sexo male');
-  // }
-  // if (sorted) {
-  //   console.log('com sorted');
-  // }
-  return objAnimalsLocations;
+
+  const { sorted = false, sex: sexo } = options;
+
+  filterSex(sexo);
+
+  if (sorted) arraySorted();
+
+  nameSpeciesLocation(options);
+
+  return objAniLocals;
 }
 
 console.log(getAnimalMap());
