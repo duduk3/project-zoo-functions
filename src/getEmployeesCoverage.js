@@ -3,45 +3,35 @@ const data = require('../data/zoo_data');
 
 const { employees } = data;
 
-let newEmployee = [];
+const getNameById = (id) => species
+  .filter((element) => id === element.id)
+  .reduce((a, el) => el.name, []);
 
-const filterEmployees = (arg) => {
-  const { name, id } = arg;
-  employees.filter((employee) => {
-    if (name === employee.firstName || name === employee.lastName || id === employee.id) {
-      newEmployee = [...newEmployee, employee];
-      return newEmployee;
-    }
-    newEmployee = [...newEmployee, employee];
-    return newEmployee;
-  });
-  return newEmployee;
-};
-
-const getNameById = (id) => species.filter((element) => id === element.id).map((el) => el.name);
-
-const getLocal = (id) => species.filter((element) => id === element.id).map((el) => el.location);
+const getLocal = (id) => species
+  .filter((element) => id === element.id)
+  .reduce((a, el) => el.location, []);
 
 function getEmployeesCoverage(arg) {
-  if (arg === true) {
-    return filterEmployees(arg);
+  const { name: fullName, id } = arg;
+  let cutName = '';
+  if (fullName) {
+    cutName = fullName.split(' ');
   }
-  return employees.reduce((acc, el) => {
-    const { responsibleFor } = el;
-    const specieName = responsibleFor.reduce((acum, item) => [...acum, ...getNameById(item)], []);
-    const locals = responsibleFor.reduce((ac, item) => [...ac, ...getLocal(item)], []);
-    const fullName = `${el.firstName} ${el.lastName}`;
-    const objEmployee = [...acc,
-      ...[{
-        id: el.id,
-        fullName,
-        species: [...specieName],
-        locations: [...locals],
-      }]];
-    return objEmployee;
-  }, []);
+  let obj = {};
+  employees.reduce((acc, emp) => {
+    if (emp.id === id || emp.firstName === cutName[0] || emp.lastName === cutName[0]) {
+      obj = {
+        id: emp.id,
+        fullName: `${emp.firstName} ${emp.lastName}`,
+        species: emp.responsibleFor.map((name) => getNameById(name)),
+        location: emp.responsibleFor.map((name) => getLocal(name)),
+      };
+    }
+    return obj;
+  }, {});
+  return obj;
 }
 
-console.log(getEmployeesCoverage({ name: 'Sharonda' }));
+console.log(getEmployeesCoverage({ id: 'c1f50212-35a6-4ecd-8223-f835538526c2' }));
 
 module.exports = getEmployeesCoverage;

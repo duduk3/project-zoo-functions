@@ -24,7 +24,7 @@ const arraySorted = (array) => {
 
 const objAniLocals = data.species.reduce((acc, e) => ({ ...acc, ...{ [e.location]: [] } }), {});
 
-const allSpeciesLocation = (options) => {
+const allSpeciesLocation = () => {
   data.species.forEach((elem) => {
     objAniLocals[elem.location] = [...objAniLocals[elem.location], ...[elem.name]];
   });
@@ -50,7 +50,7 @@ const filterSex = (sex) => {
 
 function getAnimalMap(options) {
   if (!options || options.includeNames !== true) {
-    allSpeciesLocation(options);
+    allSpeciesLocation();
     return objAniLocals;
   }
 
@@ -63,6 +63,6 @@ function getAnimalMap(options) {
   return objAniLocals;
 }
 
-console.log(getAnimalMap({ sorted: true, sex: 'male' }));
+console.log(getAnimalMap({ includeNames: true, sorted: false, sex: 'male' }));
 
 module.exports = getAnimalMap;
