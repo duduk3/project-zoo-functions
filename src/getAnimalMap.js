@@ -22,6 +22,16 @@ const arraySorted = (array) => {
   Object.keys(array).map((k) => array[k].sort());
 };
 
+const filterSex = (sex) => {
+  if (sex === 'female') {
+    return arrayFemale;
+  }
+  if (sex === 'male') {
+    return arrayMale;
+  }
+  return arrayNames;
+};
+
 const objAniLocals = data.species.reduce((acc, e) => ({ ...acc, ...{ [e.location]: [] } }), {});
 
 const allSpeciesLocation = () => {
@@ -36,16 +46,6 @@ const nameSpeciesLocation = (array) => {
       ...objAniLocals[`${elem.location}`],
       { [`${elem.name}`]: [...array[`${elem.name}`]] }];
   });
-};
-
-const filterSex = (sex) => {
-  if (sex === 'female') {
-    return arrayFemale;
-  }
-  if (sex === 'male') {
-    return arrayMale;
-  }
-  return arrayNames;
 };
 
 function getAnimalMap(options) {
@@ -63,6 +63,6 @@ function getAnimalMap(options) {
   return objAniLocals;
 }
 
-console.log(getAnimalMap({ includeNames: true, sorted: false, sex: 'male' }));
+console.log(getAnimalMap({ includeNames: false }));
 
 module.exports = getAnimalMap;
